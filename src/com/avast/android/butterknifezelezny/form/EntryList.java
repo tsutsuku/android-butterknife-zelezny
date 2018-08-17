@@ -30,6 +30,7 @@ public class EntryList extends JPanel {
     protected JTextField mPrefixValue;
     protected JLabel mPrefixLabel;
     protected JCheckBox mHolderCheck;
+    protected JCheckBox featureDevCheck;
     protected JCheckBox msplitOnclickMethodsCheck;
     protected JLabel mHolderLabel;
     protected JButton mConfirm;
@@ -174,6 +175,21 @@ public class EntryList extends JPanel {
         splitOnclickMethodsPanel.add(Box.createHorizontalGlue());
         add(splitOnclickMethodsPanel, BorderLayout.PAGE_END);
 
+        featureDevCheck = new JCheckBox();
+        featureDevCheck.setPreferredSize(new Dimension(32, 26));
+        featureDevCheck.setSelected(true);
+
+        final JLabel featureDevLabel = new JLabel();
+        featureDevLabel.setText("In Feature module Dev");
+
+        final JPanel featureDevPanel = new JPanel();
+        featureDevPanel.setLayout(new BoxLayout(featureDevPanel, BoxLayout.LINE_AXIS));
+        featureDevPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        featureDevPanel.add(featureDevCheck);
+        featureDevPanel.add(featureDevLabel);
+        featureDevPanel.add(Box.createHorizontalGlue());
+        add(featureDevPanel, BorderLayout.PAGE_END);
+
         mCancel = new JButton();
         mCancel.setAction(new CancelAction());
         mCancel.setPreferredSize(new Dimension(120, 26));
@@ -256,7 +272,13 @@ public class EntryList extends JPanel {
 
             if (valid) {
                 if (mConfirmListener != null) {
-                    mConfirmListener.onConfirm(mProject, mEditor, mElements, mPrefix, mCreateHolder, msplitOnclickMethodsCheck.isSelected());
+                    mConfirmListener.onConfirm(mProject,
+                            mEditor,
+                            mElements,
+                            mPrefix,
+                            mCreateHolder,
+                            msplitOnclickMethodsCheck.isSelected(),
+                            featureDevCheck.isSelected());
                 }
             }
         }

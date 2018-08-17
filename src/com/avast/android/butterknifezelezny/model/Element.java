@@ -19,6 +19,7 @@ public class Element {
     public boolean isValid = false;
     public boolean used = true;
     public boolean isClick = true;
+    public boolean isFeatureDev = false;
 
     public Element(String name, String id) {
         // id
@@ -49,11 +50,17 @@ public class Element {
      * @return
      */
     public String getFullID() {
+        return getFullID(false);
+    }
+
+    public String getFullID(boolean isFeatureDev){
         StringBuilder fullID = new StringBuilder();
         String rPrefix;
 
         if (isAndroidNS) {
             rPrefix = "android.R.id.";
+        } else if (isFeatureDev){
+            rPrefix = "R2.id.";
         } else {
             rPrefix = "R.id.";
         }
